@@ -13,7 +13,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::all();
+        if($articles->isEmpty())
+            return response()->json(['message' => 'No articles found'], 404);
+        else
+            return $articles;
     }
 
     /**

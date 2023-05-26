@@ -5,15 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    public function get_count($title)
+    {
+        $count = Category::where('title', $title)->count;
+        return $count;
+    }
+
     public function index()
     {
-        //
+        $categories = Category::all();
+        if($categories->isEmpty())
+            return response()->json(['message' => 'No categories found'], 404);
+        else
+            return $categories;
     }
 
     /**
@@ -51,9 +63,15 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function updateClicks($id)
     {
-        //
+        $category = Category::where('id', $id)->first();
+        $category->click_count = $category->click_count + 1;
+        $category->update();
+        return response()->json([
+            'message' => 'Category clicks updated successfully',
+            'category' => $category->click_count
+        ]);
     }
 
     /**
