@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer("category_id");
+            $table->string("title");
+            $table->text("body");
+            $table->integer("click_count")->default(0);
         });
     }
 
