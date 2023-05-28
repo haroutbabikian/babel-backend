@@ -2,7 +2,9 @@
 
 ## Prerequisites
 
-Run `php artisan migrate:fresh --seed` to create the tables on the MySQL server. Please check the `.env` file to configure the database connection. Here's a glimpse of the `.env` file:
+Run `composer install` to install all the dependencies. You can install composer from [here](https://getcomposer.org/download/).
+
+Run `php artisan migrate:fresh --seed` to create the tables on the MySQL server. Note that there are factories and seeders within the project for the news categories and articles. Please check the `.env` file to configure the database connection. Here's a glimpse of the `.env` file:
 
 ```DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
